@@ -1,0 +1,319 @@
+\documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+%\usepackage{bbm}
+\usepackage{xcolor}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1.5in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{amsthm}
+\usepackage[english]{babel}
+\usepackage{graphicx}
+\usepackage{tikz-cd}
+\usepackage{tikz}
+\usepackage{rotating}
+%\usepackage{dsfont}
+\usepackage{esint}
+\usetikzlibrary{matrix, arrows}
+
+\newtheorem{theorem}{Theorem}[subsection]
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{heuristic}[theorem]{Heuristic}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{definition}
+\newtheorem{remark}[theorem]{Remark}
+\theoremstyle{definition}
+\newtheorem{defi}[theorem]{Definition}
+\newtheorem*{theoremstar}{Theorem}
+
+% typesetting macros
+\newcommand\rea[1]{\textcolor{orange}{#1}}
+\newcommand\bsni{\bigskip\noindent}
+
+% general math macros
+\newcommand\bba{\mathbb{A}}
+\newcommand\bbb{\mathbb{B}}
+\newcommand\bbc{\mathbb{C}}
+\newcommand\bbd{\mathbb{D}}
+\newcommand\bbf{\mathbb{F}}
+\newcommand\bbl{\mathbb{L}}
+\newcommand\bbn{\mathbb{N}}
+\newcommand\bbp{\mathbb{P}}
+\newcommand\bbq{\mathbb{Q}}
+\newcommand\bbr{\mathbb{R}}
+\newcommand\bbs{\mathbb{S}}
+\newcommand\cA{\mathcal{A}}
+\newcommand\cB{\mathcal{B}}
+\newcommand\cC{\mathcal{C}}
+\newcommand\cD{\mathcal{D}}
+\newcommand\cE{\mathcal{E}}
+\newcommand\cF{\mathcal{F}}
+\newcommand\cG{\mathcal{G}}
+\newcommand\cH{\mathcal{H}}
+\newcommand\cI{\mathcal{I}}
+\newcommand\cJ{\mathcal{J}}
+\newcommand\cL{\mathcal{L}}
+\newcommand\cM{\mathcal{M}}
+\newcommand\cN{\mathcal{N}}
+\newcommand\cO{\mathcal{O}}
+\newcommand\cP{\mathcal{P}}
+\newcommand\cR{\mathcal{R}}
+\newcommand\cT{\mathcal{T}}
+\newcommand\cX{\mathcal{X}}
+\newcommand\cY{\mathcal{Y}}
+\newcommand\cZ{\mathcal{Z}}
+\newcommand\K{\mathrm{K}}
+\newcommand\R{\mathrm{R}}
+\newcommand\mi{^{-1}}
+\newcommand\minfty{{-\infty}}
+\newcommand\an{^{\mathrm{an}}}
+\newcommand\red{\mathrm{red}}
+\newcommand\tmax{_\mathrm{tmax}}
+\newcommand\sk{\mathrm{Sk}}
+\newcommand\pdisc{\overline\bbd^*}
+\newcommand\disc{\overline\bbd}
+\newcommand\Sing{\mathrm{Sing}}
+
+% general AG macros
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\exc}{exc}
+\DeclareMathOperator{\vol}{vol}
+\DeclareMathOperator{\Specop}{Spec}
+\DeclareMathOperator{\Projop}{Proj}
+\newcommand\Spec[1]{\Specop \mathrm{#1}}
+\newcommand\Proj[1]{\Projop \mathrm{#1}}
+\newcommand\charac[1]{\mathrm{char}\, #1}
+
+% n-A PSH macros
+\newcommand\field{\mathrm{K}}
+\newcommand\fieldext{\mathfrak{L}}
+\newcommand\valring{{\field^\circ}}
+\newcommand\resfield{{\tilde\field}}
+\newcommand\shilov{^{\mathrm{Shi}}}
+\newcommand\norm{\zeta}
+\newcommand\metric{\phi}
+\newcommand\PSH{\mathrm{PSH}}
+\newcommand\MA{\,\mathrm{MA}}
+\newcommand\grnorm{\norm_\bullet}
+\newcommand\grnormspace{\mathcal{N}_\bullet}
+\newcommand\normspace{\mathcal{N}}
+\newcommand\gm{\mathbb{G}_m}
+\newcommand\basis{\mathfrak{s}}
+\newcommand\basislong{\mathfrak{s}=(s_i)_i}
+\newcommand\refmetric{\phi_{\mathrm{ref}}}
+\newcommand\na{^{\mathrm{NA}}}
+
+
+% paper-specific macros or other
+\newcommand\anaff{\mathbf{A}}
+\newcommand\vp{\varphi}
+\newcommand\nv{\mathcal{N}(V)}
+\newcommand\cpe{\mathrm{(ce)}}
+\newcommand\nlin{\mathcal{N}^{lin}_\bullet(L)}
+\newcommand\ep{\mathcal{E}^p}
+\newcommand\pathspace{\mathcal{P}}
+\newcommand\path{\mathfrak{P}}
+\newcommand\rayspace{\mathcal{R}}
+\newcommand\ray{\mathfrak{R}}
+\newcommand\inj{\imath}
+\newcommand\raynorm{\mathfrak{r}^c}
+\newcommand\raymetric{\mathfrak{R}^c}
+\newcommand\pright{\dot{\phi}_0{}}
+\newcommand\pleft{\dot{\phi}_1{}}
+\newcommand\laurent{{\bbc((z))}}
+\newcommand\power{{\bbc[[z]]}}
+\newcommand\ideal{\mathfrak{a}}
+\newcommand\xlaurent{X_\laurent}
+\newcommand\xanlaurent{X^{\mathrm{an}}_\laurent}
+\newcommand\cxpower{\cX_\power}
+\newcommand\annu{{\mathrm{a}(0;a,b)}}
+\newcommand\cannu{{\bar{\mathrm{a}}(0;a,b)}}
+\newcommand\FS{\mathrm{FS}}
+\newcommand\Gm{\mathbb{G}_\mathrm{m}}
+
+\author{REBOULET Rémi}
+\title{CURRICULUM VITAE.}
+\begin{document}
+
+%\begin{center}
+%\large{\textbf{CURRICULUM VITAE.}}
+%\end{center}
+
+%\par\noindent\rule{\textwidth}{0.4pt}
+%\textbf{INFORMATIONS PERSONNELLES.}
+
+%\bsni \textbf{Nom :} REBOULET\\
+%\textbf{Prénom :} Rémi\\
+%\textbf{Date de naissance :} 26 Février 1997\\
+%\textbf{Adresse e-mail (pérenne) :} \verb|rebouletremimath@gmail.com|\\
+%\textbf{Adresse e-mail (actuelle) :} \verb|reboulet@math.univ-lyon1.fr|
+
+%\bsni
+
+\iffalse \par\noindent\rule{\textwidth}{0.4pt}
+\textbf{INFORMATIONS PROFESSIONNELLES.}
+
+\bsni \textbf{Octobre 2024.} Chargé de recherches (CNRS, section 41).\\
+Rattaché à l'Institut Camille Jordan, UMR5208.
+
+\bsni \textbf{Octobre 2022 - Septembre 2024 :} Postdoc en mathématiques.\\
+Collaboration avec Robert BERMAN.\\
+Mathematical Sciences, Chalmers University of Technology, Göteborg, Suède.
+
+\bsni \textbf{Avril 2022 - Septembre 2022 :} Postdoc en mathématiques.\\
+Collaboration avec Ruadha\'{i} DERVAN.\\
+Department of Pure Mathematics and Mathematical Statistics, University of Cambridge, Cambridge, Angleterre.
+
+\bsni \textbf{Septembre 2019 - Décembre 2021 :} Doctorat en mathématiques.\\
+\textit{From norms to metrics in non-Archimedean geometry}, co-dirigé par Sébastien BOUCKSOM et Catriona MACLEAN.\\
+Institut Fourier, Grenoble.
+
+\bsni \textbf{Septembre 2018 - Juin 2019 :} Master 2 en mathématiques.\\
+M2R \textit{Geometry, topology and applications to analysis and probability}.\\
+Mémoire de M2 \textit{Multiplier ideals in algebraic geometry}, dirigé par Catriona MACLEAN.\\
+Institut Fourier, Grenoble.
+
+\bsni \textbf{Septembre 2017 - Juin 2018 :} Master 1 en mathématiques.\\
+Master \textit{Modélisation et analyse numérique}.\\
+Mémoire de M1 \textit{Solutions renormalisées de l'équation de transport}, dirigé par Kléber CARRAPATOSO.
+Institut Mathématique Alexander Grothendieck, Montpellier.
+
+
+\bsni \textbf{Septembre 2014 - Juin 2017 :} Licence de mathématiques générales.\\
+Licence 2 \textit{CUPGE}, Licence 3 Mathématiques générales.\\
+Université d'Avignon et des Pays de Vaucluse, Avignon.
+
+\fi
+
+\par\noindent\rule{\textwidth}{0.4pt}
+\textbf{EXPOSES SCIENTIFIQUES.}
+%\par\noindent\rule{\textwidth}{0.4pt}
+
+
+\bsni \textbf{02 Mars 2026} : \textit{Dualité projective et (hyper)déterminants.}\\
+\textit{Théminaire}, ENS Lyon.
+
+\bsni \textbf{16 Septembre 2025} : \textit{Autour de l’espace de Goldman–Iwahori.}\\
+\textit{Séminaire de Systèmes dynamiques, analyse et géométrie}, Avignon.
+
+\bsni \textbf{15 Mai 2025} : \textit{L’approche variationnelle pour le problème cscK.}\\
+\textit{Séminaire GADT}, Dijon.
+
+\bsni \textbf{27 Janvier 2025} : \textit{Arcs and the Hilbert-Mumford criterion for K-stability.}\\
+\textbf{Conférence} \textit{Geofloquant}, Bruxelles.
+
+\bsni \textbf{09 Janvier 2025} : \textit{Une version de la conjecture de Yau--Tian--Donaldson via la théorie géométrique des invariants}\\
+\textit{Séminaire de géométrie}, Chambéry.
+
+\bsni \textbf{22 Juillet 2024} : \textbf{Mini-cours} sur la géométrie non-archimédienne.\\
+\textbf{Conférence} \textit{Non-Archimedean, Tropical and Arakelov Geometry}, Ratisbonne.
+
+\bsni \textbf{01 Juillet 2024} : \textit{Flats in the space of Kähler metrics}.\\
+\textbf{Conférence} \textit{BRIDGES meeting on special geometries and stability}, Cargèse.
+
+\bsni \textbf{10 Juin 2024} : \textit{Non-Archimedean methods in special degeneration problems}.\\
+\textbf{Conférence} \textit{Freixit (en l'honneur de Gérard Freixas)}, Varberg, Suède.
+
+
+\bsni \textbf{12-13 Février 2024} : \textbf{Mini-cours }avec Yueqiao Wu sur la stabilité divisorielle, dans le cadre du programme Isaac Newton Institute \textit{New equivariant methods in algebraic and differential geometry}, Cambridge.
+
+
+\bsni \textbf{25 Janvier 2024} : \textit{Plats dans l'espace des métriques positives}.\\
+\textit{Séminaire de géométrie algébrique}, IMJ-PRG, Paris.
+
+
+\bsni \textbf{11 Janvier 2024} : \textit{Flats in the space of positive metrics.}\\
+\textit{KASS Seminar}, Göteborg.
+
+
+\bsni \textbf{18 Décembre 2023} : \textit{Flats in the space of positive metrics.}\\
+\textit{ULB geometry seminar}, Université Libre de Bruxelles.
+
+
+\bsni \textbf{19 Octobre 2023} : \textit{Transcendental Okounkov bodies.}\\
+\textbf{Conférence} \textit{Journées GDR GAGC}, Poitiers.
+
+\bsni \textbf{13 Octobre 2023} : \textit{Corps d'Okounkov transcendents.}\\
+\textit{Séminaire de Géométrie, Groupes et Dynamiques}, Institut Camille Jordan, Lyon.
+
+\bsni \textbf{22 Avril 2023} : \textit{The birational geometry of GIT quotients.}\\
+\textbf{Conférence} \textit{Around Complex Geometry}, University of Illinois at Chicago.
+
+\bsni \textbf{13 Avril 2023} : \textit{The birational geometry of GIT quotients.}\\
+\textbf{Conférence} Oberwolfach \textit{"Komplexe Analysis — Differential and Algebraic methods in Kähler spaces"}, Oberwolfach, exposé court.
+
+
+\bsni \textbf{04 Avril 2023} : \textit{Stabilité et métriques Kähler–Einstein sur des variétés à fibré anticanonique gros.}\\
+\textit{Séminaires systèmes dynamiques et géométrie}, Université d'Angers.
+
+\bsni \textbf{16 Février 2023} : \textit{The birational geometry of GIT quotients.}\\
+\textit{KASS Seminar}, Chalmers University of Technology, Göteborg.
+
+\bsni \textbf{20 Janvier 2023} : \textit{Stabilité et métriques Kähler–Einstein sur des variétés à fibré anticanonique gros.}\\
+\textit{Séminaire de Géométrie}, Laboratoire de Mathématiques Jean Leray, Nantes.
+
+\bsni \textbf{12 Décembre 2022} : \textit{Stabilité et métriques Kähler–Einstein sur des variétés à fibré anticanonique gros
+.}\\
+\textit{Séminaire de géométrie complexe}, Institut Elie Cartan de Lorraine.
+
+\bsni \textbf{31 Octobre 2022} : \textit{Ding-stability for manifolds with big anticanonical class.}\\
+\textbf{Conférence} \textit{Convex and Complex: Perspectives on Positivity in Geometry. In honor of Bo Berndtsson's 70th birthday}, Cetraro.
+
+\bsni \textbf{25 Mai 2022} : \textit{Geodesics between algebraic models via Berkovich geometry.}\\
+\textit{Algebraic Geometry seminar}, DPMMS, Cambridge.
+
+\bsni \textbf{14 Mars 2022} : \textit{Plurisubharmonic geodesics in non-Archimedean geometry and limits of complex manifolds.}\\
+\textit{KASS Seminar}, Chalmers University of Technology.
+
+\bsni \textbf{10 Janvier 2022} : \textit{Géodésiques plurisousharmoniques non-archimédiennes et limites de variétés complexes.}\\
+\textit{Séminaire d'Analyse Harmonique}, Laboratoire de Mathématiques d'Orsay.
+
+\bsni \textbf{09 Décembre 2021} : \textit{Géodésiques plurisousharmoniques non-archimédiennes et limites de variétés complexes.}\\
+\textit{Séminaire de géométrie complexe}, Institut de Mathématiques de Toulouse.
+
+\bsni \textbf{18 Novembre 2021} : \textit{Metric structures on the space of Hermitian norms on a complex vector space.}\\
+\textit{Séminaire compréhensible}, Institut Fourier, Grenoble.
+
+\bsni \textbf{08 Novembre 2021} : \textit{Non-Archimedean plurisubharmonic geodesics and limits of complex geodesics.}\\
+\textit{Geometric Analysis Seminar}, Purdue.
+
+\bsni \textbf{02 Novembre 2021} : \textit{Legendre transforms, convex bodies, and plurisubharmonic metrics.}\\
+\textit{Informal Geometric Analysis Seminar}, University of Maryland.
+
+\bsni \textbf{20 Octobre 2021} : \textit{Plurisubharmonic geodesics in non-Archimedean geometry.}\\
+\textit{Oberseminar Algebra und Geometrie}, Frankfurt.
+
+\bsni \textbf{06 Octobre 2021} : \textit{Géodésiques plurisousharmoniques non-archimédiennes et limites de variétés complexes.}\\
+\textit{Séminaire de géométrie}, CMLS, Ecole Polytechnique.
+
+\bsni \textbf{07 Septembre 2021} : \textit{Non-Archimedean plurisubharmonic geodesics and complex limits.}\\
+\textbf{Conférence} \textit{K-stability and Kähler Geometry}, Cambridge.
+
+\bsni \textbf{09 Février 2021} : \textit{Plurisubharmonic geodesics in non-Archimedean geometry.}\\
+\textit{Complex Geometry seminar}, \verb|https://sites.google.com/view/cgseminar|.
+
+
+\bsni
+
+\par\noindent\rule{\textwidth}{0.4pt}
+\textbf{ENSEIGNEMENT ET DIFFUSION.}
+
+\bsni \textbf{Septembre 2024}: Participation à Math@Lyon au collège Jean Jaurès, Villeurbanne.
+\\ \verb|https://mmi-lyon.fr/?site_atelier=mathalyon|
+
+\bsni \textbf{2021-2022} - MAT307: Courbes paramétrées et équations différentielles.\\ 
+36h TD.\\
+\textit{L2 Physique-Mécanique}, DLST, Université Grenoble-Alpes.
+
+\bsni \textbf{2019-2020} - MAT432: Sequences and series of functions.\\
+Responsable d'UE, 64h CM+TD.\\
+\textit{L2 Math-Info International}, DLST, Université Grenoble-Alpes.
+
+\end{document}
